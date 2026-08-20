@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { categoryRepository } from '../repository/category.repository';
 import { CATEGORY_QUERY_KEYS } from '../constants';
-import { CategoryInput } from '../types';
+import { Category, CategoryInput } from '../types';
 import { useToast } from '@/app/providers/ToastProvider';
 import { getErrorMessage } from '@/shared/utils/error';
 
@@ -51,7 +51,16 @@ export function useDeleteCategory() {
 
   return useMutation({
     mutationFn: (id: number | string) => categoryRepository.delete(id),
-    onSuccess: () => {
+    onSuccess: (_, deletedId) => {
+      // Optimistically remove from categories list
+      queryClient.setQueriesData<Category[]>(
+        { queryKey: CATEGORY_QUERY_KEYS.LIST() },
+        (oldData) => {
+          if (!oldData) return oldData;
+          return oldData.filter((c) => String(c.id) !== String(deletedId));
+        }
+      );
+
       queryClient.invalidateQueries({ queryKey: CATEGORY_QUERY_KEYS.ALL });
       toast.success('Kategori berhasil dihapus.', 'Berhasil');
     },
