@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build:spa",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

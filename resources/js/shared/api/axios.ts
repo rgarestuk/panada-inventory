@@ -2,7 +2,7 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { storageService } from '../services/storage.service';
 
 export const apiClient = axios.create({
-  baseURL: '/',
+  baseURL: (import.meta.env.VITE_API_URL as string) || '/',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
