@@ -11,7 +11,7 @@ export const apiClient = axios.create({
     Accept: 'application/json',
     'X-Requested-With': 'XMLHttpRequest',
   },
-  timeout: 20000,
+  timeout: 30000,
 });
 
 // Request Interceptor: Attach JWT / Bearer Token automatically
