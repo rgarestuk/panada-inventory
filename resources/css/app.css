@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+
+@source '../../resources/js/**/*.{js,ts,jsx,tsx}';
+@source '../../resources/views/**/*.blade.php';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Custom smooth scroll and transitions */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: var(--font-sans);
+}
