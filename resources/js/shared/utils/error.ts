@@ -5,7 +5,6 @@ export function getErrorMessage(error: unknown): string {
   if (error instanceof AxiosError) {
     const data = error.response?.data as ApiErrorResponse | undefined;
     if (data?.message) {
-      // If there are validation field errors, append the first one
       if (data.errors && Object.keys(data.errors).length > 0) {
         const firstField = Object.keys(data.errors)[0];
         const firstMsg = data.errors[firstField][0];

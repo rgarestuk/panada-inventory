@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Create Default Admin User
         $user = User::updateOrCreate(
             ['email' => 'admin@panada.com'],
             [
@@ -23,7 +22,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 2. Seed Categories
         $categoriesData = [
             [
                 'name' => 'Elektronik & Gadget',
@@ -57,7 +55,6 @@ class DatabaseSeeder extends Seeder
             $categories[$cat['slug']] = Category::updateOrCreate(['slug' => $cat['slug']], $cat);
         }
 
-        // 3. Seed Products
         $productsData = [
             [
                 'sku' => 'ELK-MBP-14',
@@ -98,7 +95,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => $categories['komputer-aksesoris']->id,
                 'purchase_price' => 1400000,
                 'selling_price' => 1890000,
-                'stock' => 3, // Low stock!
+                'stock' => 3,
                 'min_stock' => 5,
                 'unit' => 'pcs',
                 'description' => 'Mechanical keyboard 75% layout dengan QMK/VIA support dan RGB backlight.',
@@ -109,7 +106,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => $categories['komputer-aksesoris']->id,
                 'purchase_price' => 1350000,
                 'selling_price' => 1750000,
-                'stock' => 0, // Out of stock!
+                'stock' => 0,
                 'min_stock' => 6,
                 'unit' => 'pcs',
                 'description' => 'Solid State Drive PCIe 4.0 dengan kecepatan baca hingga 7,000 MB/s.',
@@ -131,7 +128,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => $categories['alat-tulis-kantor']->id,
                 'purchase_price' => 180000,
                 'selling_price' => 240000,
-                'stock' => 4, // Low stock!
+                'stock' => 4,
                 'min_stock' => 10,
                 'unit' => 'pack',
                 'description' => 'Gel pen berkualitas dengan tinta halus dan pegangan karet nyaman.',
@@ -164,7 +161,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => $categories['peralatan-rumah-tangga']->id,
                 'purchase_price' => 8500000,
                 'selling_price' => 10999000,
-                'stock' => 2, // Low stock!
+                'stock' => 2,
                 'min_stock' => 3,
                 'unit' => 'unit',
                 'description' => 'Penyedot debu nirkabel pintar dengan teknologi laser deteksi partikel mikro.',
@@ -196,7 +193,6 @@ class DatabaseSeeder extends Seeder
         foreach ($productsData as $prodData) {
             $product = Product::updateOrCreate(['sku' => $prodData['sku']], $prodData);
 
-            // Record initial stock mutation if not already recorded
             if ($product->stock > 0 && $product->stockMutations()->count() === 0) {
                 StockMutation::create([
                     'product_id' => $product->id,

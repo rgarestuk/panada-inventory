@@ -26,7 +26,6 @@ import {
 export const DashboardPage: React.FC = () => {
   const { data: stats, isLoading, error } = useDashboardStats();
 
-  // Modals
   const [adjustProduct, setAdjustProduct] = useState<Product | null>(null);
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
 
@@ -68,9 +67,7 @@ export const DashboardPage: React.FC = () => {
 
       {!isLoading && overview && (
         <div className="space-y-6">
-          {/* KPI Metric Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Total Products */}
             <Card hoverable>
               <CardBody className="p-5 flex items-center justify-between">
                 <div>
@@ -84,7 +81,6 @@ export const DashboardPage: React.FC = () => {
               </CardBody>
             </Card>
 
-            {/* Total Inventory Value */}
             <Card hoverable>
               <CardBody className="p-5 flex items-center justify-between">
                 <div>
@@ -98,7 +94,6 @@ export const DashboardPage: React.FC = () => {
               </CardBody>
             </Card>
 
-            {/* Low Stock Alert */}
             <Card hoverable>
               <CardBody className="p-5 flex items-center justify-between">
                 <div>
@@ -112,7 +107,6 @@ export const DashboardPage: React.FC = () => {
               </CardBody>
             </Card>
 
-            {/* Total Categories */}
             <Card hoverable>
               <CardBody className="p-5 flex items-center justify-between">
                 <div>
@@ -127,7 +121,6 @@ export const DashboardPage: React.FC = () => {
             </Card>
           </div>
 
-          {/* Low Stock Warning Banner if any */}
           {overview.out_of_stock_count > 0 && (
             <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -144,9 +137,7 @@ export const DashboardPage: React.FC = () => {
             </div>
           )}
 
-          {/* Tables Row: Low Stock Items & Recent Activity */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Low Stock Attention List */}
             <Card>
               <CardHeader>
                 <div>
@@ -193,7 +184,6 @@ export const DashboardPage: React.FC = () => {
               </CardBody>
             </Card>
 
-            {/* Recent Stock Mutations */}
             <Card>
               <CardHeader>
                 <div>
@@ -241,14 +231,12 @@ export const DashboardPage: React.FC = () => {
         </div>
       )}
 
-      {/* Stock Adjustment Modal */}
       <StockAdjustModal
         isOpen={Boolean(adjustProduct)}
         onClose={() => setAdjustProduct(null)}
         product={adjustProduct}
       />
 
-      {/* Product Form Modal */}
       <ProductFormModal
         isOpen={isAddProductOpen}
         onClose={() => setIsAddProductOpen(false)}

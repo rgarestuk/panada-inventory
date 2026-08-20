@@ -38,7 +38,6 @@ export const RegisterPage: React.FC = () => {
 
   return (
     <div className="w-full max-w-md">
-      {/* Brand header */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-200 mb-4">
           <Boxes className="w-8 h-8" />
@@ -47,7 +46,6 @@ export const RegisterPage: React.FC = () => {
         <p className="text-sm text-slate-500 mt-1">Daftar untuk mulai mencatat inventaris barang</p>
       </div>
 
-      {/* Card container */}
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xl shadow-slate-200/40 p-8">
         {formError && (
           <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium">

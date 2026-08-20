@@ -46,7 +46,6 @@ export function useUpdateProduct() {
     mutationFn: ({ id, data }: { id: number | string; data: ProductInput }) =>
       productRepository.update(id, data),
     onSuccess: (updatedProd) => {
-      // Optimistically update product in cache
       queryClient.setQueriesData<PaginatedResponse<Product>>(
         { queryKey: ['products'] },
         (oldData) => {
@@ -77,7 +76,6 @@ export function useDeleteProduct() {
   return useMutation({
     mutationFn: (id: number | string) => productRepository.delete(id),
     onSuccess: (_, deletedId) => {
-      // 1. Optimistically remove deleted item from cache instantly
       queryClient.setQueriesData<PaginatedResponse<Product>>(
         { queryKey: ['products'] },
         (oldData) => {
@@ -93,7 +91,6 @@ export function useDeleteProduct() {
         }
       );
 
-      // 2. Refetch from server in background
       queryClient.invalidateQueries({ queryKey: ['products'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       toast.success('Produk berhasil dihapus dari inventaris.', 'Berhasil');
@@ -112,7 +109,6 @@ export function useAdjustStock() {
     mutationFn: ({ id, data }: { id: number | string; data: StockAdjustmentInput }) =>
       productRepository.adjustStock(id, data),
     onSuccess: (product) => {
-      // Optimistically update stock in cache
       queryClient.setQueriesData<PaginatedResponse<Product>>(
         { queryKey: ['products'] },
         (oldData) => {

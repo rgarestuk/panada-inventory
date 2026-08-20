@@ -52,7 +52,6 @@ export function useDeleteCategory() {
   return useMutation({
     mutationFn: (id: number | string) => categoryRepository.delete(id),
     onSuccess: (_, deletedId) => {
-      // Optimistically remove from categories list
       queryClient.setQueriesData<Category[]>(
         { queryKey: CATEGORY_QUERY_KEYS.LIST() },
         (oldData) => {

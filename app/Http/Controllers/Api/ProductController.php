@@ -19,17 +19,14 @@ class ProductController extends Controller
     {
         $query = Product::with('category');
 
-        // Search by keyword
         if ($search = $request->query('search')) {
             $query->search($search);
         }
 
-        // Filter by Category
         if ($categoryId = $request->query('category_id')) {
             $query->where('category_id', $categoryId);
         }
 
-        // Filter by Stock Status
         $status = $request->query('status');
         if ($status === 'low_stock') {
             $query->whereColumn('stock', '<=', 'min_stock')->where('stock', '>', 0);
@@ -39,7 +36,6 @@ class ProductController extends Controller
             $query->whereColumn('stock', '>', 'min_stock');
         }
 
-        // Sorting
         $sortBy = $request->query('sort_by', 'created_at');
         $sortOrder = $request->query('sort_order', 'desc');
         $allowedSorts = ['name', 'sku', 'stock', 'purchase_price', 'selling_price', 'created_at'];
@@ -142,7 +138,6 @@ class ProductController extends Controller
     public function adjustStock(StockAdjustmentRequest $request, Product $product): JsonResponse
     {
         return DB::transaction(function () use ($request, $product) {
-            // Lock row for update
             $product = Product::where('id', $product->id)->lockForUpdate()->firstOrFail();
             $previousStock = $product->stock;
             $qty = (int) $request->quantity;
@@ -158,7 +153,7 @@ class ProductController extends Controller
                     ]);
                 }
                 $newStock = $previousStock - $qty;
-            } else { // adjustment / opname setting absolute qty
+            } else {
                 $newStock = $qty;
             }
 

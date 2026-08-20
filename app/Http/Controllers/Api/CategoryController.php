@@ -27,7 +27,6 @@ class CategoryController extends Controller
     {
         $slug = $request->slug ?: Str::slug($request->name);
 
-        // Ensure slug unique
         $originalSlug = $slug;
         $counter = 1;
         while (Category::where('slug', $slug)->exists()) {

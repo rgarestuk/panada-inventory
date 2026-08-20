@@ -42,7 +42,6 @@ class AuthController extends Controller
             ]);
         }
 
-        // Revoke all previous tokens for single device session or create new
         $token = $user->createToken('panada_auth_token')->plainTextToken;
 
         return response()->json([

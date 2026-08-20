@@ -133,14 +133,12 @@ export const CategoryListPage: React.FC = () => {
         </>
       )}
 
-      {/* Form Modal */}
       <CategoryFormModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         category={selectedCategory}
       />
 
-      {/* Delete Confirmation Dialog */}
       <ConfirmDialog
         isOpen={Boolean(categoryToDelete)}
         onClose={() => setCategoryToDelete(null)}

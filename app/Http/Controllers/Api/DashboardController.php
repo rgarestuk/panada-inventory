@@ -19,7 +19,6 @@ class DashboardController extends Controller
         $totalProducts = Product::count();
         $totalCategories = Category::count();
 
-        // Calculate total inventory valuation
         $totalInventoryValue = Product::select(DB::raw('SUM(stock * purchase_price) as total_val'))
             ->value('total_val') ?? 0;
 

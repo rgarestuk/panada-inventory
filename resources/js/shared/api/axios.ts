@@ -14,7 +14,6 @@ export const apiClient = axios.create({
   timeout: 30000,
 });
 
-// Request Interceptor: Attach JWT / Bearer Token automatically
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = storageService.getToken();
@@ -26,15 +25,12 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor: Global 401 Unauthorized handling
 apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      // Clear expired or invalid token
       storageService.clearAuth();
 
-      // If not already on auth page, redirect to login
       if (
         typeof window !== 'undefined' &&
         !window.location.pathname.startsWith('/login') &&

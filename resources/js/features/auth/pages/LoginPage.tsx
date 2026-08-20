@@ -19,7 +19,6 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div className="w-full max-w-md">
-      {/* Brand header */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-200 mb-4">
           <Boxes className="w-8 h-8" />
@@ -28,7 +27,6 @@ export const LoginPage: React.FC = () => {
         <p className="text-sm text-slate-500 mt-1">Masuk untuk mengelola stok & data inventaris</p>
       </div>
 
-      {/* Card container */}
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xl shadow-slate-200/40 p-8">
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
@@ -66,7 +64,6 @@ export const LoginPage: React.FC = () => {
           </div>
         </form>
 
-        {/* Demo Credentials Helper */}
         <div className="mt-6 p-3 rounded-lg bg-indigo-50/70 border border-indigo-100 text-xs text-indigo-900">
           <p className="font-semibold mb-1">Demo Akun Tersedia:</p>
           <p>Email: <span className="font-mono font-medium text-indigo-700">admin@panada.com</span></p>

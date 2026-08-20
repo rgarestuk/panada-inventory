@@ -33,7 +33,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
       {!isLoading && product && (
         <div className="space-y-6">
-          {/* Header Summary */}
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-200">
               <div>
@@ -75,7 +74,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             )}
           </div>
 
-          {/* Stock Mutations Log */}
           <div>
             <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
               <Clock className="w-4 h-4 text-indigo-500" /> Riwayat Mutasi Stok

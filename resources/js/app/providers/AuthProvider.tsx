@@ -92,7 +92,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await authRepository.logout();
       }
     } catch {
-      // Ignore network error on logout
     } finally {
       authService.handleLogout();
       setUser(null);

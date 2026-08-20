@@ -30,7 +30,6 @@ import {
 } from 'lucide-react';
 
 export const ProductListPage: React.FC = () => {
-  // Filters & State
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryId, setCategoryId] = useState<string>('');
   const [stockStatus, setStockStatus] = useState<string>('');
@@ -38,17 +37,14 @@ export const ProductListPage: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [page, setPage] = useState<number>(1);
 
-  // Debounce search query
   const debouncedSearch = useDebounce(searchTerm, 400);
 
-  // Modal States
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [adjustProduct, setAdjustProduct] = useState<Product | null>(null);
   const [detailProductId, setDetailProductId] = useState<number | null>(null);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
 
-  // TanStack Queries
   const filterParams: ProductFilterParams = {
     page,
     per_page: 10,
@@ -95,10 +91,8 @@ export const ProductListPage: React.FC = () => {
         }
       />
 
-      {/* Filter Toolbar */}
       <div className="bg-white rounded-xl border border-slate-200/80 p-4 mb-6 shadow-xs space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {/* Search Input */}
           <Input
             placeholder="Cari SKU, nama produk..."
             value={searchTerm}
@@ -109,7 +103,6 @@ export const ProductListPage: React.FC = () => {
             leftIcon={<Search className="w-4 h-4" />}
           />
 
-          {/* Category Filter */}
           <Select
             value={categoryId}
             onChange={(e) => {
@@ -125,7 +118,6 @@ export const ProductListPage: React.FC = () => {
             ))}
           </Select>
 
-          {/* Stock Status Filter */}
           <Select
             value={stockStatus}
             onChange={(e) => {
@@ -139,7 +131,6 @@ export const ProductListPage: React.FC = () => {
             <option value="out_of_stock">Stok Habis (Out of Stock)</option>
           </Select>
 
-          {/* Sort Filter */}
           <Select
             value={`${sortBy}-${sortOrder}`}
             onChange={(e) => {
@@ -157,17 +148,14 @@ export const ProductListPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Loading state */}
       {isLoading && <LoadingSpinner label="Memuat katalog inventaris..." />}
 
-      {/* Error state */}
       {error && (
         <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-sm text-rose-700">
           Gagal mengambil data produk dari server. Pastikan backend Laravel berjalan.
         </div>
       )}
 
-      {/* Data Table */}
       {!isLoading && !error && (
         <>
           {products.length === 0 ? (
@@ -195,7 +183,6 @@ export const ProductListPage: React.FC = () => {
                 <TableBody>
                   {products.map((p) => (
                     <TableRow key={p.id}>
-                      {/* Product Name & SKU */}
                       <TableCell>
                         <div>
                           <span className="font-mono text-xs text-indigo-600 font-semibold bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100">
@@ -205,7 +192,6 @@ export const ProductListPage: React.FC = () => {
                         </div>
                       </TableCell>
 
-                      {/* Category */}
                       <TableCell>
                         {p.category ? (
                           <span className="inline-flex items-center gap-1 text-xs text-slate-700 bg-slate-100 px-2 py-0.5 rounded-full font-medium">
@@ -217,7 +203,6 @@ export const ProductListPage: React.FC = () => {
                         )}
                       </TableCell>
 
-                      {/* Prices */}
                       <TableCell>
                         <div className="text-xs">
                           <p className="text-slate-500">Beli: {formatRupiah(p.purchase_price)}</p>
@@ -225,7 +210,6 @@ export const ProductListPage: React.FC = () => {
                         </div>
                       </TableCell>
 
-                      {/* Stock */}
                       <TableCell>
                         <div className="font-mono">
                           <span className="text-sm font-bold text-slate-900">{p.stock}</span>{' '}
@@ -234,7 +218,6 @@ export const ProductListPage: React.FC = () => {
                         </div>
                       </TableCell>
 
-                      {/* Status */}
                       <TableCell>
                         {p.status === 'in_stock' && (
                           <Badge variant="success" dot>
@@ -253,12 +236,10 @@ export const ProductListPage: React.FC = () => {
                         )}
                       </TableCell>
 
-                      {/* Total Value */}
                       <TableCell className="font-mono text-xs font-semibold text-slate-800">
                         {formatRupiah(p.total_value)}
                       </TableCell>
 
-                      {/* Actions */}
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
                           <Button
@@ -303,7 +284,6 @@ export const ProductListPage: React.FC = () => {
                 </TableBody>
               </Table>
 
-              {/* Pagination Controls */}
               {meta && meta.last_page > 1 && (
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
                   <p className="text-xs text-slate-500">
@@ -342,28 +322,24 @@ export const ProductListPage: React.FC = () => {
         </>
       )}
 
-      {/* Form Modal (Add / Edit) */}
       <ProductFormModal
         isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
         product={selectedProduct}
       />
 
-      {/* Stock Adjustment Modal */}
       <StockAdjustModal
         isOpen={Boolean(adjustProduct)}
         onClose={() => setAdjustProduct(null)}
         product={adjustProduct}
       />
 
-      {/* Product Detail & Mutation History Modal */}
       <ProductDetailModal
         isOpen={Boolean(detailProductId)}
         onClose={() => setDetailProductId(null)}
         productId={detailProductId}
       />
 
-      {/* Delete Confirmation Dialog */}
       <ConfirmDialog
         isOpen={Boolean(productToDelete)}
         onClose={() => setProductToDelete(null)}

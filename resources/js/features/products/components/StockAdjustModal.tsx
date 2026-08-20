@@ -68,7 +68,6 @@ export const StockAdjustModal: React.FC<StockAdjustModalProps> = ({
       maxWidth="md"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Current stock indicator */}
         <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
           <div>
             <p className="text-xs text-slate-500 font-medium">Stok Saat Ini</p>
