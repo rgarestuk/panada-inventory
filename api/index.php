@@ -15,12 +15,12 @@ foreach ($tmpDirs as $dir) {
     }
 }
 
-putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
-putenv('APP_CONFIG_CACHE=/tmp/bootstrap/cache/config.php');
-putenv('APP_EVENTS_CACHE=/tmp/bootstrap/cache/events.php');
-putenv('APP_PACKAGES_CACHE=/tmp/bootstrap/cache/packages.php');
-putenv('APP_ROUTES_CACHE=/tmp/bootstrap/cache/routes.php');
-putenv('APP_SERVICES_CACHE=/tmp/bootstrap/cache/services.php');
+// Fix: Override SCRIPT_NAME so Laravel does not strip the /api/ prefix
+// from REQUEST_URI. Without this, /api/auth/login becomes auth/login
+// and matches the web catch-all route instead of the API route.
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/../public/index.php';
+$_SERVER['PHP_SELF'] = '/index.php';
 
 // Forward request to Laravel public entrypoint
 require __DIR__ . '/../public/index.php';
