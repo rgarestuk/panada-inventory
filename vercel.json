@@ -30,8 +30,18 @@
     }
   ],
   "env": {
+    "APP_NAME": "Panada Inventory",
     "APP_ENV": "production",
+    "APP_KEY": "base64:fLiHpoOisnv3IVfu5LX7xQWmT9GUYAQR/nEwuZsH9Ow=",
     "APP_DEBUG": "true",
+    "APP_URL": "https://panada-inventory.vercel.app",
+    "DB_CONNECTION": "pgsql",
+    "DB_HOST": "aws-0-ap-northeast-1.pooler.supabase.com",
+    "DB_PORT": "5432",
+    "DB_DATABASE": "postgres",
+    "DB_USERNAME": "postgres.swaqakqzxmkycnobbigk",
+    "DB_PASSWORD": "WYdmf3tcui62k4z6",
+    "DB_SSLMODE": "require",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -40,6 +50,7 @@
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
     "SESSION_DRIVER": "cookie",
+    "QUEUE_CONNECTION": "sync",
     "LOG_CHANNEL": "stderr"
   }
 }
