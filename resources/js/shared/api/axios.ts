@@ -1,14 +1,17 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { storageService } from '../services/storage.service';
 
+const rawBaseUrl = (import.meta.env.VITE_API_URL as string) || '';
+const cleanBaseUrl = rawBaseUrl.endsWith('/') ? rawBaseUrl.slice(0, -1) : rawBaseUrl;
+
 export const apiClient = axios.create({
-  baseURL: (import.meta.env.VITE_API_URL as string) || '/',
+  baseURL: cleanBaseUrl || '/',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
     'X-Requested-With': 'XMLHttpRequest',
   },
-  timeout: 15000,
+  timeout: 20000,
 });
 
 // Request Interceptor: Attach JWT / Bearer Token automatically
