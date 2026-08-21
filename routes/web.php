@@ -2,6 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{any?}', function () {
-    return view('app');
-})->where('any', '^(?!api|up).*$');
+Route::get('/', function () {
+    return response()->json([
+        'app' => 'Panada Inventory API',
+        'status' => 'online',
+        'version' => '1.0.0',
+        'docs' => [
+            'auth' => '/api/auth/*',
+            'products' => '/api/products',
+            'categories' => '/api/categories',
+            'dashboard' => '/api/dashboard/stats',
+        ]
+    ]);
+});
